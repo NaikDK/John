@@ -65,8 +65,12 @@ def run_john():
         os.system("start winword")
     elif 'start outlook' in command:
         os.system("start outlook")
+    elif command == 'quit':
+        talk("Shutting it Down!")
+        exit()
     else:
         talk("Sorry Can you repeat that?")
 
 if __name__ == "__main__":
-    run_john()
+    while(true):
+        run_john()
