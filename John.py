@@ -9,33 +9,51 @@ import speech_recognition as sr
 engine = pyttsx3.init()
 wishings = ["good morning", "good noon", "good afternoon", "good evening", "good night"]
 r = sr.Recognizer()
+Intents = {'hello':'Hello, tell me what can I do for you?',
+           'wish me luck': 'Best of Luck',
+           'thank you': 'Anytime',
+           'thanks': 'Anytime!!',
+           'f*** off': 'No, You Fuck off!!'}
 
 def talk(text):
     engine.say(text)
     engine.runAndWait()
 def wish_user():
     hour = int(datetime.datetime.now().strftime("%H"))
-    if 0>=hour>6:
-        talk("You should cnsider going to sleep early..")
-    elif 6>=hour>12:
+    print(hour)
+    if hour>=0 and hour<6:
+        print(hour)
+        talk("You should consider going to sleep early..")
+    elif hour>=6 and hour<12:
+        print(hour)
         talk("Good Morning!")
-    elif 12>=hour>14:
+    elif hour>=12 and hour<14:
+        print(hour)
         talk("Good Noon")
-    elif 14>=hour>16:
+    elif hour>=14 and hour<16:
+        print(hour)
         talk("Good Afternoon")
-    elif 16>=hour>20:
+    elif hour>=16 and hour<20:
+        print(hour)
         talk("Good Evening")
-    else:
+    elif hour>=20:
+        print(hour)
         talk("Good Night")
 def listen():
     try:
         with sr.Microphone() as source:
-            print("Listening...")
             audio = r.listen(source)
-            r.pause_threshold = 0.3
+            command = ""
+            # r.pause_threshold = 0.3
             command = r.recognize_google(audio)
             # print(command)
             command = command.lower()
+            print(command)
+            # if command in Intents.keys:
+            #     print('Here...')
+            #     talk(Intents[command])
+            #     return command
+            # el
             if 'hey josh' in command:
                 command = command.replace('hey josh', '')
                 return command
@@ -47,7 +65,8 @@ def listen():
         talk("Try that again")
 
 def run_john():
-    wish_user()
+    # wish_user()
+    print("Listening...")
     command = listen()
     print(command)
     if 'play' in command:
@@ -65,12 +84,14 @@ def run_john():
         os.system("start winword")
     elif 'start outlook' in command:
         os.system("start outlook")
-    elif command == 'quit':
+    elif command == 'quit' or 'shut up' in command or command == 'close':
         talk("Shutting it Down!")
         exit()
     else:
         talk("Sorry Can you repeat that?")
+    
 
 if __name__ == "__main__":
-    while(true):
+    wish_user()
+    while(True):
         run_john()
