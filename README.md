@@ -3,17 +3,11 @@
 
 ## Feature List:
 
- > Greet User based on time
-
+ > Greet User based on tim
  > Voice based interaction
- 
  > Set Alarm for given time
- 
  > Open Word
- 
  > Open Excel
- 
  > Open Outlook
- 
  > Play song on YouTube
  
